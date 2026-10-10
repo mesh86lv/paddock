@@ -1,0 +1,30 @@
+{
+  "lastChangelogVersion": "1.1.0",
+  "theme": "noctalia",
+  "packages": [
+    "npm:pi-mcp-adapter",
+    "npm:@rohaquinlop/pi-deepseek-cache",
+    "npm:pi-hash-anchored-edit",
+    "npm:pi-ask-user",
+    "npm:@mickyyy68/pi-subagents"
+  ],
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "followUpMode": "all",
+  "showCacheMissNotices": true,
+  "defaultProjectTrust": "ask",
+  "modelThinkingLevels": {
+    "deepseek/deepseek-v4-flash": "medium",
+    "deepseek/deepseek-v4-pro": "high"
+  },
+  "tuiMode": "regular",
+  "fullscreenExitOutput": "transcript",
+  "subagents": {
+    "disableBuiltins": true
+  },
+  "builtinExtensions": {
+    "mcp": false
+  },
+  "quietStartup": "header"
+}

@@ -1,0 +1,22 @@
+# pi runtime state. Generated on session start, or local to the machine.
+agents/
+sessions/
+npm/
+*.jsonl
+mcp-cache.json
+mcp-npx-cache.json
+mcp-onboarding.json
+models-store.json
+
+# herdr manages this file and overwrites it on update. Do not commit.
+herdr-agent-state.ts
+
+# nix
+result
+result-*
+
+# editors and direnv
+.direnv/
+*.swp
+*.swo
+*~
