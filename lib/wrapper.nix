@@ -423,9 +423,11 @@ pkgs.writeShellApplication {
         # herdr-agent-state.ts extension can report agent state to the
         # herdr sidebar. Without these, the extension disables itself.
         # Note: this gives the sandbox access to the herdr socket.
-        while IFS= read -r var; do
-          ENV_ARGS+=(--setenv "$var" "''${!var}")
-        done < <(compgen -v HERDR_)
+        while IFS='=' read -r -d "" name value; do
+          case "$name" in
+            HERDR_*) ENV_ARGS+=(--setenv "$name" "$value") ;;
+          esac
+        done < <(env -0)
 
         HERDR_ARGS=()
         if [ -n "''${HERDR_SOCKET_PATH:-}" ] && [ -S "$HERDR_SOCKET_PATH" ]; then
