@@ -70,6 +70,16 @@ pkgs.writeShellApplication {
         #
         # Known limitations are documented in docs/security.md.
 
+        # herdr only sees the host-side process of this pane (ai-agent), not
+        # pi inside bwrap, so it cannot tell which agent is running. Tell it
+        # via HERDR_AGENT. herdr reads the variable from the process
+        # environment as of exec, so re-exec once with it set. Applies only
+        # inside a herdr pane and only if the user has not set it already.
+        if [ -n "''${HERDR_ENV:-}" ] && [ -z "''${HERDR_AGENT:-}" ]; then
+          export HERDR_AGENT=pi
+          exec "$0" "$@"
+        fi
+
         HOME_DIR="$(cd "$HOME" && pwd -P)"
         USER_NAME="''${USER:-$(id -un)}"
         PROJECT_DIR="$(pwd -P)"
@@ -418,22 +428,6 @@ pkgs.writeShellApplication {
           done
         fi
 
-        # herdr integration: forward HERDR_* (HERDR_ENV, HERDR_SOCKET_PATH,
-        # HERDR_PANE_ID, ...) and mount the control socket, so the
-        # herdr-agent-state.ts extension can report agent state to the
-        # herdr sidebar. Without these, the extension disables itself.
-        # Note: this gives the sandbox access to the herdr socket.
-        while IFS='=' read -r -d "" name value; do
-          case "$name" in
-            HERDR_*) ENV_ARGS+=(--setenv "$name" "$value") ;;
-          esac
-        done < <(env -0)
-
-        HERDR_ARGS=()
-        if [ -n "''${HERDR_SOCKET_PATH:-}" ] && [ -S "$HERDR_SOCKET_PATH" ]; then
-          HERDR_ARGS+=(--bind "$HERDR_SOCKET_PATH" "$HERDR_SOCKET_PATH")
-        fi
-
         [ -n "$ROLE_SLUG" ] && ENV_ARGS+=(--setenv AI_AGENT_ROLE "$ROLE_SLUG")
 
         CA_ARGS=()
@@ -514,7 +508,6 @@ pkgs.writeShellApplication {
             "''${MASK_ARGS[@]}" \
             "''${PI_ARGS[@]}" \
             "''${GH_ARGS[@]}" \
-            "''${HERDR_ARGS[@]}" \
             --ro-bind-try "$HOME_DIR/.nix-profile" "$HOME_DIR/.nix-profile" \
             --ro-bind-try "$HOME_DIR/.npm-global" "$HOME_DIR/.npm-global" \
             --bind "$NPM_HTTP_CACHE" "$HOME_DIR/.npm" \
