@@ -418,6 +418,20 @@ pkgs.writeShellApplication {
           done
         fi
 
+        # herdr integration: forward HERDR_* (HERDR_ENV, HERDR_SOCKET_PATH,
+        # HERDR_PANE_ID, ...) and mount the control socket, so the
+        # herdr-agent-state.ts extension can report agent state to the
+        # herdr sidebar. Without these, the extension disables itself.
+        # Note: this gives the sandbox access to the herdr socket.
+        while IFS= read -r var; do
+          ENV_ARGS+=(--setenv "$var" "''${!var}")
+        done < <(compgen -v HERDR_)
+
+        HERDR_ARGS=()
+        if [ -n "''${HERDR_SOCKET_PATH:-}" ] && [ -S "$HERDR_SOCKET_PATH" ]; then
+          HERDR_ARGS+=(--bind "$HERDR_SOCKET_PATH" "$HERDR_SOCKET_PATH")
+        fi
+
         [ -n "$ROLE_SLUG" ] && ENV_ARGS+=(--setenv AI_AGENT_ROLE "$ROLE_SLUG")
 
         CA_ARGS=()
@@ -498,6 +512,7 @@ pkgs.writeShellApplication {
             "''${MASK_ARGS[@]}" \
             "''${PI_ARGS[@]}" \
             "''${GH_ARGS[@]}" \
+            "''${HERDR_ARGS[@]}" \
             --ro-bind-try "$HOME_DIR/.nix-profile" "$HOME_DIR/.nix-profile" \
             --ro-bind-try "$HOME_DIR/.npm-global" "$HOME_DIR/.npm-global" \
             --bind "$NPM_HTTP_CACHE" "$HOME_DIR/.npm" \
