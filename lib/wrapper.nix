@@ -214,7 +214,7 @@ pkgs.writeShellApplication {
 
               FRONTMATTER=$(awk '
                 BEGIN{fm=0}
-                fm<2 && /^---[ \t]*\r?$/{fm++; next}
+                fm<2 && /^---[ \t]*\r?$/ {fm++; next}
                 fm<2{print}
                 fm>=2{exit}
               ' "$SELECTED_FILE")
@@ -247,7 +247,7 @@ pkgs.writeShellApplication {
 
               PROMPT_BODY=$(awk '
                 BEGIN{fm=0}
-                fm<2 && /^---[ \t]*\r?$/{fm++; next}
+                fm<2 && /^---[ \t]*\r?$/ {fm++; next}
                 fm>=2{print}
               ' "$SELECTED_FILE")
               [ -z "$PROMPT_BODY" ] && PROMPT_BODY=$(cat "$SELECTED_FILE")
@@ -365,7 +365,7 @@ pkgs.writeShellApplication {
         PI_ARGS=(--ro-bind-try "$HOME_DIR/.pi" "$HOME_DIR/.pi")
         PI_ARGS+=(--bind "$HOME_DIR/.pi/agent" "$HOME_DIR/.pi/agent")
 
-        RW_OK=" sessions npm agents mcp-cache.json mcp-npx-cache.json mcp-onboarding.json models-store.json "
+        RW_OK=" sessions npm agents mcp mcp-cache.json mcp-npx-cache.json mcp-onboarding.json models-store.json "
         for e in "$HOME_DIR/.pi/agent"/* "$HOME_DIR/.pi/agent"/.[!.]*; do
           [ -e "$e" ] || continue
           case "$RW_OK" in *" $(basename "$e") "*) continue ;; esac
@@ -526,8 +526,7 @@ pkgs.writeShellApplication {
             "''${CA_ARGS[@]}" \
             "''${ENV_ARGS[@]}" \
             --chdir "$PROJECT_DIR" \
-            bash -c '
-              mode=$1; preflight=$2; shift 2
+            bash -c '\n              mode=$1; preflight=$2; shift 2
               ulimit -u 2048 2>/dev/null || true
               ulimit -n 4096 2>/dev/null || true
               ulimit -v 33554432 2>/dev/null || true
