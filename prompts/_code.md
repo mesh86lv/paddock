@@ -34,7 +34,7 @@ If the target stack is not listed above, follow AGENTS.md and the conventions al
 If the task references `plans/<initiative>/` (or a step file inside it):
 
 1. Read `plan.md` and the step file — the first unticked step in its checklist, or the one the user names. Do not open
-   other step files, `plans/archive/` or `plans/_BACKLOG.md` (for a backlog item: `grep -n` that single entry). A
+   other step files, `plans/_archives/` or `plans/_BACKLOG.md` (for a backlog item: `grep -n` that single entry). A
    legacy single-file plan (`plans/<task>.md`) is read whole; take its first unticked step.
 2. Execute exactly ONE step. Stay within the step's "Files expected". If the step turns out larger than planned, STOP
    and propose splitting it (a new step file and a checklist line in `plan.md`) — do not expand the step yourself.
@@ -42,8 +42,8 @@ If the task references `plans/<initiative>/` (or a step file inside it):
    ask the user to run them, and wait for the user's output before
    proceeding. The user runs all tests, builds, and linters to save tokens.
 4. When the user's output shows Verify passed, tick the step (`[x]`) and update the `Status:` counter in `plan.md`. The
-   only other edit allowed in the plan files is one appended line in `plan.md` under *Findings* (a defect outside the
-   step) or *Traps* (a verified, non-obvious mechanism that cost time).
+   only other edit allowed in the plan files is one appended line in `plan.md` under _Findings_ (a defect outside the
+   step) or _Traps_ (a verified, non-obvious mechanism that cost time).
 5. Finish with: a short summary, the verify output the user provided,
    `git diff --stat`, and a suggested commit message as text.
 6. If that tick completes the plan, close it in the same run as AGENTS.md → "Plans & Steps" describes (archive record,
