@@ -526,7 +526,8 @@ pkgs.writeShellApplication {
             "''${CA_ARGS[@]}" \
             "''${ENV_ARGS[@]}" \
             --chdir "$PROJECT_DIR" \
-            bash -c '\n              mode=$1; preflight=$2; shift 2
+            bash -c '
+              mode=$1; preflight=$2; shift 2
               ulimit -u 2048 2>/dev/null || true
               ulimit -n 4096 2>/dev/null || true
               ulimit -v 33554432 2>/dev/null || true
