@@ -7,6 +7,7 @@
 //   reset --hard, clean -f, checkout -- / .        (destroy work)
 //   restore without --staged, stash drop/clear
 //   branch -D, merge (except --abort)
+//   worktree add/remove/prune/move/lock/unlock/repair (managed by ai-wt)
 //
 // This is a safety net against accidental commands, not a security
 // boundary. A bypass through `sh -c` with string concatenation, an alias,
@@ -89,6 +90,17 @@ const RULES: Rule[] = [
       "i",
     ),
     reason: "merge produces a commit; the user commits manually",
+  },
+  {
+    // Worktrees are managed by ai-wt on the host. The agent runs inside
+    // a worktree created for it; it must not create, remove, or move them.
+    // `git worktree list` (read-only) is allowed.
+    re: new RegExp(
+      String.raw`\bgit${GIT_OPTS}\s+worktree\s+(?:add|remove|prune|move|lock|unlock|repair)(?![\w-])`,
+      "i",
+    ),
+    reason:
+      "git worktree mutations are managed by ai-wt on the host; only `git worktree list` is allowed",
   },
 ];
 

@@ -12,6 +12,10 @@ let
     inherit pkgs lib;
     inherit (cfg) herdrPackage deployKeyPath modelChoices;
   };
+
+  aiWorktree = import ../lib/worktree.nix {
+    inherit pkgs lib aiAgent;
+  };
 in
 {
   options.programs.pi-agent-sandbox = {
@@ -50,7 +54,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ aiAgent ];
+    home.packages = [
+      aiAgent
+      aiWorktree
+    ];
 
     home.shellAliases.ai = "ai-agent";
 

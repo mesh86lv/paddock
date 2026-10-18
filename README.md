@@ -158,11 +158,34 @@ in `dependencies` instead of `peerDependencies`. pi warns that it may load
 two copies of a module. In practice nothing breaks. Fixing this requires a
 change upstream in the packages; it is not a bug in this project.
 
+## Parallel tasks
+
+`ai-wt` creates a git worktree for one task and launches `ai-agent`
+inside it, so several tasks can run at once without touching each other's
+working tree:
+
+    cd ~/projects/my-project
+    ai-wt task-a
+
+Open one herdr pane per task. Each run gets its own sandbox (pasta, netns,
+bwrap, pi). The first call creates `.worktrees/<task-name>` on branch
+`wt/<task-name>` and adds `.worktrees/` to `.gitignore`. When a task is
+done, merge on the host (the agent cannot merge — `no-git-commit-push`
+blocks `git merge` and `git worktree *`):
+
+    git merge --no-ff wt/task-a
+    git worktree remove .worktrees/task-a
+
+git branch -d wt/task-a
+
+See `docs/worktrees.md` for details and limitations.
+
 ## Documentation
 
 - `docs/architecture.md`: how the layers fit together.
 - `docs/roles.md`: role reference and enforcement matrix.
 - `docs/security.md`: threat model and known limitations.
+- `docs/worktrees.md`: parallel tasks with git worktrees.
 
 ## License
 

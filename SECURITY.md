@@ -21,6 +21,11 @@ Full list in `docs/security.md`. Short version:
 - `~/.pi/agent/sessions/` is read-write and shared across projects. An
   agent in project A can read the history of a session in project B.
 - Path enforcement uses regex. It catches common cases, not creative ones.
+- `.worktrees/` lives inside the main checkout but each parallel run gets
+  its own `$PROJECT_DIR`. Secret masking, protected paths, and role scope
+  checks apply per-worktree: a `.env` in the main checkout is not masked
+  when running from a worktree, and vice versa. This is usually what you
+  want, but it is not a shared boundary.
 
 If you need a real boundary, run pi inside a VM or gVisor.
 

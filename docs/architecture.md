@@ -11,6 +11,15 @@
 
 ## Components
 
+### lib/worktree.nix
+
+`ai-wt` — host-side helper. Creates `<main-repo>/.worktrees/<name>` on
+branch `wt/<name>`, adds `.worktrees/` to `.gitignore` once, then execs
+`ai-agent` with cwd in the new worktree. Each invocation becomes its own
+sandbox; the git common dir is shared, so `git merge wt/<name>` from the
+main checkout works. The agent cannot mutate worktrees —
+`no-git-commit-push` blocks `git worktree add/remove/...`.
+
 ### modules/ai-agent.nix
 
 A Home Manager module. It builds the `ai-agent` wrapper as a shell script

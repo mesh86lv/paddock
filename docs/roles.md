@@ -5,19 +5,19 @@ Each role is defined by a file in `prompts/`. The `PI_ROLE` slug is what
 
 ## Reference
 
-| Slug | Model | Tools | Enforcement |
-|------|-------|-------|-------------|
-| orchestrator | flash | read, grep, find, ls, subagent, subagent_supervisor, ask_user | tool-block: edit, write, bash |
-| architect | flash | read, grep, find, ls, edit, write | path-gate: plans/**/*.md, bash blocked |
-| code | flash | read, grep, find, ls, edit, write, bash | none |
-| code-reviewer | flash | read, grep, find, ls | tool-block: edit, write, bash |
-| debug | flash | read, grep, find, ls, edit, write, bash | none |
-| devops | flash | read, grep, find, ls, edit, write, bash | prompt-only approval gate |
-| documentation-writer | flash | read, grep, find, ls, edit, write, bash | path-gate: docs, *.md |
-| merge-resolver | flash | read, grep, find, ls, edit, write, bash | none, rebase allowed |
-| project-research | flash | read, grep, find, ls | tool-block: edit, write, bash |
-| security-review | flash | read, grep, find, ls | tool-block: edit, write, bash |
-| test-engineer | flash | read, grep, find, ls, bash, edit, write | path-gate: tests, *.test.* |
+| Slug                 | Model | Tools                                                         | Enforcement                            |
+| -------------------- | ----- | ------------------------------------------------------------- | -------------------------------------- |
+| orchestrator         | flash | read, grep, find, ls, subagent, subagent_supervisor, ask_user | tool-block: edit, write, bash          |
+| architect            | flash | read, grep, find, ls, edit, write                             | path-gate: plans/**/*.md, bash blocked |
+| code                 | flash | read, grep, find, ls, edit, write, bash                       | none                                   |
+| code-reviewer        | flash | read, grep, find, ls                                          | tool-block: edit, write, bash          |
+| debug                | flash | read, grep, find, ls, edit, write, bash                       | none                                   |
+| devops               | flash | read, grep, find, ls, edit, write, bash                       | prompt-only approval gate              |
+| documentation-writer | flash | read, grep, find, ls, edit, write, bash                       | path-gate: docs, *.md                  |
+| merge-resolver       | flash | read, grep, find, ls, edit, write, bash                       | none, rebase allowed                   |
+| project-research     | flash | read, grep, find, ls                                          | tool-block: edit, write, bash          |
+| security-review      | flash | read, grep, find, ls                                          | tool-block: edit, write, bash          |
+| test-engineer        | flash | read, grep, find, ls, bash, edit, write                       | path-gate: tests, _.test._             |
 
 ## Bash policies, all roles
 
@@ -25,8 +25,10 @@ Independent of role, bash calls are filtered by two extensions:
 
 `no-git-commit-push` blocks `git commit`, `git push`, `git reset --hard`,
 `git clean -f`, `git checkout --`, `git restore` without `--staged`,
-`git stash drop` and `clear`, `git branch -D`, and `git merge` except
-`--abort`.
+`git stash drop` and `clear`, `git branch -D`, `git merge` except
+`--abort`, and `git worktree add/remove/prune/move/lock/unlock/repair`
+(worktrees are managed by `ai-wt` on the host; only `git worktree list`
+is allowed from inside the sandbox).
 
 `no-heavy-commands` blocks `npm`, `pnpm`, `yarn`, `bun`, `npx`, `pnpx`,
 `bunx`, `cargo`, `go`, `pytest`, `ruff`, `mypy`, `uv`, `poetry`, `pip`,
