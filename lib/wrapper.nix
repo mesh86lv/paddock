@@ -11,7 +11,7 @@
   herdrPackage ? null,
   deployKeyPath ? null,
   modelChoices ? [
-    "deepseek/deepseek-v4-flash"
+    "deepseek/deepseek-flash"
     "deepseek/deepseek-v4-pro"
   ],
 }:

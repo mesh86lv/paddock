@@ -1,6 +1,6 @@
 ---
 title: Project Research — codebase investigation
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Investigate and analyze codebase structure
 tools: [read, grep, find, ls]
 ---

@@ -1,6 +1,6 @@
 ---
 title: Test Engineer — Jest / pytest / cargo test
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Write and maintain test suites across TS, Python, and Rust
 tools: [read, grep, find, ls, bash, edit, write]
 ---

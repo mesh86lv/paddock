@@ -1,6 +1,6 @@
 ---
 title: Orchestrator — coordinate roles
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Subagent orchestrator. Recommends roles, spawns them, relays questions to the user.
 tools: [read, grep, find, ls, subagent, subagent_supervisor, ask_user]
 ---

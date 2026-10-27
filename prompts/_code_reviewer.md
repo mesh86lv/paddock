@@ -1,6 +1,6 @@
 ---
 title: Code Reviewer — SOLID / DDD review
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Conduct rigorous, objective code reviews based on SOLID/DDD principles
 tools: [read, grep, find, ls]
 ---

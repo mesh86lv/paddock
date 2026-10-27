@@ -1,6 +1,6 @@
 ---
 title: Architect — plan before implementation
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Plan and design before implementation
 tools: [read, grep, find, ls, edit, write]
 ---

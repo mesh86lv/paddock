@@ -1,6 +1,6 @@
 ---
 title: Debug — diagnose and fix
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Diagnose and fix software issues
 tools: [read, grep, find, ls, edit, write, bash]
 ---

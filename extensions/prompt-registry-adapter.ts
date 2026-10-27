@@ -90,7 +90,7 @@ async function syncAgents(): Promise<void> {
       "---",
       `name: ${role}`,
       `description: ${fm.description ?? fm.title ?? role}`,
-      `model: ${fm.model ?? "deepseek/deepseek-v4-flash"}`,
+      `model: ${fm.model ?? "deepseek/deepseek-flash"}`,
       `tools: ${fm.tools ?? "read,grep,find,ls"}`,
       "---",
       "",

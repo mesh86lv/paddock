@@ -1,6 +1,6 @@
 ---
 title: Code — implement & refactor
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Write, modify, and refactor code
 tools: [read, grep, find, ls, edit, write, bash]
 ---

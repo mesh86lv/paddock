@@ -1,6 +1,6 @@
 ---
 title: Documentation Writer — READMEs, guides, API docs
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Create clear technical project documentation
 tools: [read, grep, find, ls, edit, write, bash]
 ---

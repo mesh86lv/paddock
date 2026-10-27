@@ -75,9 +75,9 @@ Import the module and configure:
       herdrPackage = inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
       # Optional. Models offered in the fzf picker. Defaults are
-      # deepseek/deepseek-v4-flash and deepseek/deepseek-v4-pro.
+      # deepseek/deepseek-flash and deepseek/deepseek-v4-pro.
       modelChoices = [
-        "deepseek/deepseek-v4-flash"
+        "deepseek/deepseek-flash"
         "deepseek/deepseek-v4-pro"
       ];
     };

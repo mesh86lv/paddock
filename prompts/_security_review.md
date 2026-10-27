@@ -1,6 +1,6 @@
 ---
 title: Security Review — audit for vulnerabilities
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Audit code for security vulnerabilities
 tools: [read, grep, find, ls]
 ---

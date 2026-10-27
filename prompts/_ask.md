@@ -1,6 +1,6 @@
 ---
 title: Ask — answers and explanations
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Get answers and explanations
 tools: [read, grep, find, ls]
 ---

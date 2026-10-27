@@ -1,6 +1,6 @@
 ---
 title: Merge Resolver — resolve git conflicts
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Resolve merge conflicts intelligently using git history
 tools: [read, grep, find, ls, edit, write, bash]
 ---

@@ -1,6 +1,6 @@
 ---
 title: DevOps — deploy and manage infrastructure
-model: deepseek-v4-flash
+model: deepseek-flash
 description: Deploy and manage infrastructure automation
 tools: [read, grep, find, ls, edit, write, bash]
 ---

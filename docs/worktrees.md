@@ -20,7 +20,7 @@ Output on the first run:
     Preparing worktree (new branch 'wt/feature-auth')
     HEAD is now at abc1234 Last commit
     prompt: _code.md
-    model:  deepseek-v4-flash
+    model:  deepseek-flash
     tools:  read,grep,find,ls,edit,write,bash
 
 You are now inside the `ai-agent` sandbox with `$PWD` set to

@@ -46,7 +46,7 @@ in
     modelChoices = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [
-        "deepseek/deepseek-v4-flash"
+        "deepseek/deepseek-flash"
         "deepseek/deepseek-v4-pro"
       ];
       description = "Models offered in the fzf picker at launch.";

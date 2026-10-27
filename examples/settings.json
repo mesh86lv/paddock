@@ -15,7 +15,7 @@
   "showCacheMissNotices": true,
   "defaultProjectTrust": "ask",
   "modelThinkingLevels": {
-    "deepseek/deepseek-v4-flash": "medium",
+    "deepseek/deepseek-flash": "medium",
     "deepseek/deepseek-v4-pro": "high"
   },
   "tuiMode": "regular",
