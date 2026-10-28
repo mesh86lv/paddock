@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.programs.pi-agent-sandbox;
+  cfg = config.programs.paddock;
 
   ai_agent = import ../lib/wrapper.nix {
     inherit pkgs lib;
@@ -18,7 +18,7 @@ let
   };
 in
 {
-  options.programs.pi-agent-sandbox = {
+  options.programs.paddock = {
     enable = lib.mkEnableOption "pi coding agent sandbox (bubblewrap, pasta, role-based extensions)";
 
     herdrPackage = lib.mkOption {

@@ -3,7 +3,7 @@
 # Exposed separately from modules/ai-agent.nix so it can be built and
 # tested without the home-manager module system, e.g.:
 #
-#   nix build github:USER/pi-agent-sandbox#ai_agent
+#   nix build github:USER/paddock#ai_agent
 #
 {
   pkgs,

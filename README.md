@@ -1,4 +1,4 @@
-# pi-agent-sandbox
+# paddock
 
 A sandbox wrapper for the [pi coding agent](https://github.com/earendil-works/pi).
 It runs pi inside a bubblewrap container with a private network namespace,
@@ -55,14 +55,14 @@ user through a supervisor channel.
 
 Add the flake as an input:
 
-    inputs.pi-agent-sandbox.url = "github:mesh86lv/pi-agent-sandbox";
-    inputs.pi-agent-sandbox.inputs.nixpkgs.follows = "nixpkgs";
+    inputs.paddock.url = "github:mesh86lv/paddock";
+    inputs.paddock.inputs.nixpkgs.follows = "nixpkgs";
 
 Import the module and configure:
 
-    imports = [ inputs.pi-agent-sandbox.homeManagerModules.default ];
+    imports = [ inputs.paddock.homeManagerModules.default ];
 
-    programs.pi-agent-sandbox = {
+    programs.paddock = {
       enable = true;
 
       # Optional. Mounted read-only inside the sandbox. If null, no key is

@@ -14,7 +14,7 @@
     in
     {
       # Home Manager module. Import as:
-      #   imports = [ inputs.pi-agent-sandbox.homeManagerModules.default ];
+      #   imports = [ inputs.paddock.homeManagerModules.default ];
       #
       # Nix warns "unknown flake output 'homeManagerModules'" because this
       # output is not part of the standard flake schema. It is a harmless
@@ -22,12 +22,12 @@
       # through a flake sees it.
       homeManagerModules = {
         default = import ./modules/ai-agent.nix;
-        pi-agent-sandbox = import ./modules/ai-agent.nix;
+        paddock = import ./modules/ai-agent.nix;
       };
 
       # Standalone derivations, built without the module system:
-      #   nix build github:USER/pi-agent-sandbox#ai_agent
-      #   nix build github:USER/pi-agent-sandbox#ai_worktree
+      #   nix build github:USER/paddock#ai_agent
+      #   nix build github:USER/paddock#ai_worktree
       packages = forAllSystems (
         pkgs:
         let
