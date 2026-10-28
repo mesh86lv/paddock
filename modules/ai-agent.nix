@@ -9,12 +9,12 @@ let
   cfg = config.programs.paddock;
 
   ai_agent = import ../lib/wrapper.nix {
-    inherit pkgs lib;
+    inherit pkgs;
     inherit (cfg) herdrPackage deployKeyPath modelChoices;
   };
 
   ai_worktree = import ../lib/worktree.nix {
-    inherit pkgs lib ai_agent;
+    inherit pkgs ai_agent;
   };
 in
 {
@@ -61,8 +61,6 @@ in
 
     home.shellAliases.ai = "ai-agent";
 
-    # Symlinks into ~/.pi/agent. Edit the files in this repository, not
-    # in the home directory.
     home.file = {
       ".pi/agent/extensions/no-git-commit-push.ts".source = ../extensions/no-git-commit-push.ts;
       ".pi/agent/extensions/permission-gate.ts".source = ../extensions/permission-gate.ts;
