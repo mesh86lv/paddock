@@ -3,7 +3,7 @@
 # Exposed separately from modules/ai-agent.nix so it can be built and
 # tested without the home-manager module system, e.g.:
 #
-#   nix build github:USER/pi-agent-sandbox#aiAgent
+#   nix build github:USER/pi-agent-sandbox#ai_agent
 #
 {
   pkgs,
@@ -444,7 +444,7 @@ pkgs.writeShellApplication {
           fi
         done
 
-        SANDBOX_PATH="${strictSandboxPath}:/run/current-system/sw/bin:/etc/profiles/per-user/$USER_NAME/bin:$HOME_DIR/.nix-profile/bin:$HOME_DIR/.npm-global/bin"
+        SANDBOX_PATH="${strictSandboxPath}:/run/current-system/sw/bin:/etc/profiles/per-user/$USER_NAME/bin:$HOME_DIR/.nix-profile/bin:$HOME_DIR/.npm-global/bin:$HOME_DIR/.cargo/bin"
 
         RUN_MODE="pi"
         [ -n "''${AI_AGENT_SHELL:-}" ] && RUN_MODE="shell"
@@ -510,6 +510,7 @@ pkgs.writeShellApplication {
             "''${GH_ARGS[@]}" \
             --ro-bind-try "$HOME_DIR/.nix-profile" "$HOME_DIR/.nix-profile" \
             --ro-bind-try "$HOME_DIR/.npm-global" "$HOME_DIR/.npm-global" \
+            --ro-bind-try "$HOME_DIR/.cargo" "$HOME_DIR/.cargo" \
             --bind "$NPM_HTTP_CACHE" "$HOME_DIR/.npm" \
             "''${SSH_ARGS[@]}" \
             --setenv HOME "$HOME_DIR" \

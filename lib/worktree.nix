@@ -1,8 +1,8 @@
-# ai-wt: create (or reuse) a git worktree and launch ai-agent inside it.
+# ai_worktree: create (or reuse) a git worktree and launch ai-agent inside it.
 #
 # Usage from anywhere in a git checkout:
 #
-#   ai-wt <task-name> [base-ref]
+#   ai_worktree <task-name> [base-ref]
 #
 # Creates <main-repo>/.worktrees/<task-name> on a new branch
 # wt/<task-name> from [base-ref] (default HEAD), then execs ai-agent
@@ -14,12 +14,11 @@
 # is what makes `git merge wt/<name>` in the main checkout work.
 {
   pkgs,
-  lib ? pkgs.lib,
-  aiAgent,
+  ai_agent,
 }:
 
 pkgs.writeShellApplication {
-  name = "ai-wt";
+  name = "ai_worktree";
   runtimeInputs = with pkgs; [
     git
     gnugrep
@@ -29,7 +28,7 @@ pkgs.writeShellApplication {
 
   text = ''
     if [ $# -lt 1 ]; then
-      echo "usage: ai-wt <task-name> [base-ref]" >&2
+      echo "usage: ai_worktree <task-name> [base-ref]" >&2
       exit 2
     fi
     name="$1"
@@ -56,7 +55,7 @@ pkgs.writeShellApplication {
     gitignore="$main_root/.gitignore"
 
     if ! grep -qxE '\.worktrees/?$' "$gitignore" 2>/dev/null; then
-      printf '\n# ai-wt: parallel worktrees\n.worktrees/\n' >> "$gitignore"
+      printf '\n# ai_worktree: parallel worktrees\n.worktrees/\n' >> "$gitignore"
       echo "note: added .worktrees/ to $gitignore" >&2
     fi
 
@@ -71,6 +70,6 @@ pkgs.writeShellApplication {
     fi
 
     cd "$wt"
-    exec ${aiAgent}/bin/ai-agent
+    exec ${ai_agent}/bin/ai-agent
   '';
 }

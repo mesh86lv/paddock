@@ -8,13 +8,13 @@
 let
   cfg = config.programs.pi-agent-sandbox;
 
-  aiAgent = import ../lib/wrapper.nix {
+  ai_agent = import ../lib/wrapper.nix {
     inherit pkgs lib;
     inherit (cfg) herdrPackage deployKeyPath modelChoices;
   };
 
-  aiWorktree = import ../lib/worktree.nix {
-    inherit pkgs lib aiAgent;
+  ai_worktree = import ../lib/worktree.nix {
+    inherit pkgs lib ai_agent;
   };
 in
 {
@@ -55,8 +55,8 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      aiAgent
-      aiWorktree
+      ai_agent
+      ai_worktree
     ];
 
     home.shellAliases.ai = "ai-agent";

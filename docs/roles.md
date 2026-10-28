@@ -27,7 +27,7 @@ Independent of role, bash calls are filtered by two extensions:
 `git clean -f`, `git checkout --`, `git restore` without `--staged`,
 `git stash drop` and `clear`, `git branch -D`, `git merge` except
 `--abort`, and `git worktree add/remove/prune/move/lock/unlock/repair`
-(worktrees are managed by `ai-wt` on the host; only `git worktree list`
+(worktrees are managed by `ai_worktree` on the host; only `git worktree list`
 is allowed from inside the sandbox).
 
 `no-heavy-commands` blocks `npm`, `pnpm`, `yarn`, `bun`, `npx`, `pnpx`,

@@ -13,7 +13,7 @@
 
 ### lib/worktree.nix
 
-`ai-wt` — host-side helper. Creates `<main-repo>/.worktrees/<name>` on
+`ai_worktree` — host-side helper. Creates `<main-repo>/.worktrees/<name>` on
 branch `wt/<name>`, adds `.worktrees/` to `.gitignore` once, then execs
 `ai-agent` with cwd in the new worktree. Each invocation becomes its own
 sandbox; the git common dir is shared, so `git merge wt/<name>` from the

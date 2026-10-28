@@ -26,18 +26,18 @@
       };
 
       # Standalone derivations, built without the module system:
-      #   nix build github:USER/pi-agent-sandbox#aiAgent
-      #   nix build github:USER/pi-agent-sandbox#ai-wt
+      #   nix build github:USER/pi-agent-sandbox#ai_agent
+      #   nix build github:USER/pi-agent-sandbox#ai_worktree
       packages = forAllSystems (
         pkgs:
         let
           aiAgent = import ./lib/wrapper.nix { inherit pkgs; };
-          aiWorktree = import ./lib/worktree.nix { inherit pkgs aiAgent; };
+          ai_worktree = import ./lib/worktree.nix { inherit pkgs aiAgent; };
         in
         {
-          aiAgent = aiAgent;
-          "ai-wt" = aiWorktree;
           default = aiAgent;
+          ai_agent = aiAgent;
+          ai_worktree = ai_worktree;
         }
       );
     };

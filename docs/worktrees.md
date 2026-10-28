@@ -1,6 +1,6 @@
 # Parallel tasks with git worktrees
 
-`ai-wt` creates a git worktree for one task and launches `ai-agent` inside
+`ai_worktree` creates a git worktree for one task and launches `ai-agent` inside
 it. Use it to run several tasks at once, each in its own sandbox, and
 merge results back into the main checkout by hand.
 
@@ -12,7 +12,7 @@ trees separate, so an agent on one task cannot touch the other's files.
 ### 1. Start the first task
 
     cd ~/projects/my-project
-    ai-wt feature-auth
+    ai_worktree feature-auth
 
 Output on the first run:
 
@@ -31,7 +31,7 @@ is invisible to this session.
 
 ### 2. Start a second task in another herdr pane
 
-    ai-wt feature-billing
+    ai_worktree feature-billing
 
 Each pane is its own pasta netns + bwrap + pi process. They share:
 
@@ -63,7 +63,7 @@ the host:
 
     ~/projects/my-project/.worktrees/feature-auth$
 
-Re-enter the same worktree with `ai-wt feature-auth` — it detects the
+Re-enter the same worktree with `ai_worktree feature-auth` — it detects the
 existing directory and goes straight to `ai-agent`, no new branch.
 
 ### 5. Commit inside the sandbox
@@ -98,7 +98,7 @@ If you want help resolving conflicts, run the `merge-resolver` role
 inside the worktree — it can `git rebase` but not `git merge` or
 `git push`, so the final history decision stays with you:
 
-    ai-wt feature-auth        # inside, pick _merge_resolver from the menu
+    ai_worktree feature-auth        # inside, pick _merge_resolver from the menu
 
 ### 7. Clean up
 
@@ -115,37 +115,37 @@ cannot undo worktree mutations for you (`no-git-commit-push` blocks
 
 ### 8. Commit the `.gitignore` change once
 
-The first `ai-wt` run appends `.worktrees/` to `.gitignore` in the main
+The first `ai_worktree` run appends `.worktrees/` to `.gitignore` in the main
 checkout. That change sits in the main repo's working tree until you
 commit it:
 
     git add .gitignore
     git commit -m "chore: ignore .worktrees/"
 
-Do this once, on the first task. Subsequent `ai-wt` calls see the line
+Do this once, on the first task. Subsequent `ai_worktree` calls see the line
 and do not touch `.gitignore` again.
 
-## What `ai-wt` prints in each case
+## What `ai_worktree` prints in each case
 
     # first run, no worktree, no branch
-    $ ai-wt my-task
+    $ ai_worktree my-task
     note: added .worktrees/ to /home/alice/projects/my-project/.gitignore
     Preparing worktree (new branch 'wt/my-task')
     HEAD is now at abc1234 ...
     ... (agent starts)
 
     # existing worktree on disk
-    $ ai-wt my-task
+    $ ai_worktree my-task
     reusing existing worktree: /home/alice/projects/my-project/.worktrees/my-task
     ... (agent starts)
 
     # worktree removed, branch still present
-    $ ai-wt my-task
+    $ ai_worktree my-task
     Preparing worktree (checking out branch 'wt/my-task')
     ... (agent starts)
 
     # invoked from inside a worktree — main checkout is resolved automatically
-    $ cd .worktrees/feature-auth && ai-wt my-task
+    $ cd .worktrees/feature-auth && ai_worktree my-task
     Preparing worktree (new branch 'wt/my-task')
     ...
 

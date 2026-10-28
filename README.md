@@ -160,12 +160,12 @@ change upstream in the packages; it is not a bug in this project.
 
 ## Parallel tasks
 
-`ai-wt` creates a git worktree for one task and launches `ai-agent`
+`ai_worktree` creates a git worktree for one task and launches `ai-agent`
 inside it, so several tasks can run at once without touching each other's
 working tree:
 
     cd ~/projects/my-project
-    ai-wt task-a
+    ai_worktree task-a
 
 Open one herdr pane per task. Each run gets its own sandbox (pasta, netns,
 bwrap, pi). The first call creates `.worktrees/<task-name>` on branch

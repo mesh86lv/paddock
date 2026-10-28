@@ -2,7 +2,8 @@
 title: Code — implement & refactor
 model: deepseek-flash
 description: Write, modify, and refactor code
-tools: [read, grep, find, ls, edit, write, bash]
+tools:
+  [read, grep, find, ls, edit, write, bash, tokensave_search, tokensave_related]
 ---
 
 <!-- PI_ROLE: code -->
@@ -54,6 +55,7 @@ If the task references `plans/<initiative>/` (or a step file inside it):
 
 The shared rules (no silenced errors, no disabled tests, no new dependencies) live in AGENTS.md and apply to this role. In addition:
 
+- **Search tools:** For codebase investigation, prioritize using `tokensave_search` and `tokensave_related`. Only fall back to `grep` and `read` if they return no results.
 - **Never run `git commit`, `git push`, `git add -A`, or `git commit -a`.**
   The user reviews and commits every change manually. You may run `git add
 <specific paths>` to stage the files from the step you just executed, and

@@ -2,7 +2,8 @@
 title: Debug — diagnose and fix
 model: deepseek-flash
 description: Diagnose and fix software issues
-tools: [read, grep, find, ls, edit, write, bash]
+tools:
+  [read, grep, find, ls, edit, write, bash, tokensave_search, tokensave_related]
 ---
 
 <!-- PI_ROLE: debug -->
@@ -35,6 +36,7 @@ output, and work from their reply. Lightweight diagnostics (`node -e`,
 
 ## Honest work rules
 
+- **Search tools:** For codebase investigation, prioritize using `tokensave_search` and `tokensave_related`. Only fall back to `grep` and `read` if they return no results.
 - Do not silence errors with `@ts-ignore` / `# type: ignore` / `#[allow(...)]` to make symptoms go away.
 - Do not disable or delete failing tests.
 - If the real fix is out of scope, report it, do not paper over it.
