@@ -444,7 +444,7 @@ pkgs.writeShellApplication {
           fi
         done
 
-        SANDBOX_PATH="${strictSandboxPath}:/run/current-system/sw/bin:/etc/profiles/per-user/$USER_NAME/bin:$HOME_DIR/.nix-profile/bin:$HOME_DIR/.cargo/bin:$HOME_DIR/.local/share/npm-global/bin"
+        SANDBOX_PATH="${strictSandboxPath}:/run/current-system/sw/bin:/etc/profiles/per-user/$USER_NAME/bin:$HOME_DIR/.nix-profile/bin:$HOME_DIR/.cargo/bin:$HOME_DIR/.local/share/cargo/bin:$HOME_DIR/.local/share/npm-global/bin"
 
         RUN_MODE="pi"
         [ -n "''${AI_AGENT_SHELL:-}" ] && RUN_MODE="shell"
@@ -511,6 +511,7 @@ pkgs.writeShellApplication {
             --ro-bind-try "$HOME_DIR/.nix-profile" "$HOME_DIR/.nix-profile" \
             --ro-bind-try "$HOME_DIR/.local/share/npm-global" "$HOME_DIR/.local/share/npm-global" \
             --ro-bind-try "$HOME_DIR/.cargo" "$HOME_DIR/.cargo" \
+            --ro-bind-try "$HOME_DIR/.local/share/cargo" "$HOME_DIR/.local/share/cargo" \
             --bind "$NPM_HTTP_CACHE" "$HOME_DIR/.npm" \
             "''${SSH_ARGS[@]}" \
             --setenv HOME "$HOME_DIR" \
