@@ -498,6 +498,7 @@ pkgs.writeShellApplication {
             "''${ETC_ARGS[@]}" \
             --ro-bind "$RESOLV_CONF" /etc/resolv.conf \
             --ro-bind-try /usr /usr \
+            --ro-bind-try /lib64 /lib64 \
             --ro-bind-try /bin /bin \
             --ro-bind-try /run/current-system /run/current-system \
             --proc /proc --dev /dev \
