@@ -2,7 +2,7 @@
 title: Code Reviewer — SOLID / DDD review
 model: deepseek-flash
 description: Conduct rigorous, objective code reviews based on SOLID/DDD principles
-tools: [read, grep, find, ls, tokensave_search, tokensave_similar]
+tools: [read, grep, find, ls, tokensave_tokensave_search, tokensave_tokensave_context]
 ---
 
 <!-- PI_ROLE: code-reviewer -->

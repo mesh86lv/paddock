@@ -2,7 +2,7 @@
 title: Debug — diagnose and fix
 model: deepseek-flash
 description: Diagnose and fix software issues
-tools: [read, grep, find, ls, edit, write, bash, tokensave_search, tokensave_similar]
+tools: [read, grep, find, ls, edit, write, bash, tokensave_tokensave_search, tokensave_tokensave_context]
 ---
 
 <!-- PI_ROLE: debug -->

@@ -2,7 +2,7 @@
 title: Ask — answers and explanations
 model: deepseek-flash
 description: Get answers and explanations
-tools: [read, grep, find, ls, tokensave_search, tokensave_similar]
+tools: [read, grep, find, ls, tokensave_tokensave_search, tokensave_tokensave_context]
 ---
 
 <!-- PI_ROLE: ask -->

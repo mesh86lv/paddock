@@ -2,7 +2,7 @@
 title: Project Research — codebase investigation
 model: deepseek-flash
 description: Investigate and analyze codebase structure
-tools: [read, grep, find, ls, tokensave_search, tokensave_similar]
+tools: [read, grep, find, ls, tokensave_tokensave_search, tokensave_tokensave_context]
 ---
 
 <!-- PI_ROLE: project-research -->
