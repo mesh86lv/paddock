@@ -297,6 +297,11 @@ pkgs.writeShellApplication {
 
         if [ "$READ_ONLY" = 1 ]; then
           PROJECT_ARGS=(--ro-bind "$PROJECT_DIR" "$PROJECT_DIR")
+          # .tokensave/ must be writable even in read-only mode, otherwise
+          # tokensave serve fails with "unable to open database file"
+          if [ -d "$PROJECT_DIR/.tokensave" ]; then
+            PROJECT_ARGS+=(--bind "$PROJECT_DIR/.tokensave" "$PROJECT_DIR/.tokensave")
+          fi
           GIT_ARGS=()
           for gd in "''${GIT_DIRS[@]}"; do
             GIT_ARGS+=(--ro-bind "$gd" "$gd")
